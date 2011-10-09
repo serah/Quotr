@@ -1,0 +1,10 @@
+Quotr
+
+A Python-Flask based Quote Management system created to manage IRC quotes
+
+Based on:
+
+Python
+Flask
+Flask-Bcrypt
+Flask-SQLAlchemy

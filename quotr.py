@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-    Wombat 
+    Quotr 
     ~~~~~~
 
-    An Asset Managment System written using Flask with SQLAlchemy
+    A Quote Managment System written using Flask and SQLAlchemy
     
     Extensions used:
         Flask-SQLAlchemy
         Flask-WTF
-        Flask-Uploads
-        Flask-Mail    
+        Flask-Bcrypt
+        Flask-Mail
 
     :Author : Pronoy Chopra
-    :Project: Worldforge
-    :program: GSoC 2011
-    :Mentor : Kai Blin
+    :Project: Quotr
             
 """
 #-----------------------------imports-------------------------------------------
@@ -45,7 +43,6 @@ bcrypt_init(app)
 mail = Mail(app)
 
 #all functions need to have to be imported from Base class or SVNfunctions() class
-func = Base()
 
 #-----------------------All forms are defined here------------------------------
 
@@ -114,32 +111,6 @@ class RegisterationForm (Form):
      
      
      
-    class UpdateForm (Form):
-        
-        #username = TextField("Your new email")
-        password = PasswordField("New Password", [
-                                validators.Required(),
-                                validators.EqualTo('confirm', 
-                                message='Passwords must match')
-                                ])
-        confirm = PasswordField("Your new password again")
-        Name = TextField("Your name")
-        Nickname = TextField("Your nickname")    
-        VCS_Username = TextField("Your VCS Username")
-        VCS_Password = PasswordField("Your VCS Password")
-        Update = SubmitField("Update Information")
-     
-     
-     class ForgotPassword (Form):
-         username = TextField("Your Email/Username ")
-         submit = SubmitField("Check for Username")
-         
-         def validate_email(self,username):
-             forgetful_user = User.query.filter_by(email=username.data).first()
-             if forgetful_user is None:
-                 raise ValidationError, "Username doesn't exist"
-         
-            
 #-----------------------------database related actions--------------------------
 
 
@@ -161,5 +132,12 @@ def after_request(response):
 
 #----------------------------decorators start here------------------------------
 
+@app.conf('/')
+def index():
+    return render_template('index.html')
+    
+    
+    
+    
 if __name__ == '__main__':
     app.run()

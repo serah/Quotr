@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Quotr</title>
+    <meta name="description" content="Quotr, Quote manager">
+    <meta name="author" content="Pronoy Chopra">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap-main.css') }}">
+    <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-dropdown.js') }}""></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-twipsy.js') }}""></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-scrollspy.js') }}""></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-application.js') }}""></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-modal.js') }}""></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-popover.js') }}""></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-alerts.js') }}""></script>
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.ico')}}">
+    
+    <!-- the css for overides-->
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+    
+  </head>
+    
+    <body>
+    
+    
+    {% block topbar%}
+      <!-- place where the top bar will be kept -->
+      
+      
+      <div class="topbar-wrapper" data-scrollspy="scrollspy" style="z-index: 5;">
+        <div class="topbar" data-dropdown="dropdown" >
+          <div class="fill">
+            <div class="container">
+              
+                
+            </div><!-- container -->
+          </div> <!-- fill -->
+        </div><!-- topbar -->
+      </div><!-- topbar wrapper-->
+      
+    {% endblock %}
+    
+    
+    {% if not session.logged_in %} <!-- if not logged in -->
+    {% block intro%} <!-- show the intro and about block -->
+   
+    {% endblock %}
+    
+    {% else %} <!-- if logged in -->
+    
+    {% block body %} <!-- show individual page bodies -->
+    {% endblock %}
+    
+    {% endif %}
+                <footer class="footer">
+      <div class="container">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>Designed and built by <a href="http://pronoy.in">@pronoyc</a> <br />
+        </p>
+      </div>
+    </footer>
+
+    </body>
+</html>
+
+
