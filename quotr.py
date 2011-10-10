@@ -15,7 +15,7 @@
     :Project: Quotr
             
 """
-#-----------------------------imports-------------------------------------------
+#-------------------------------imports-----------------------------------------
 #bunch of imports
 from __future__ import with_statement
 from sqlite3 import dbapi2 as sqlite3
@@ -29,6 +29,7 @@ from flaskext.wtf import Form, TextField, TextAreaField, PasswordField, \
     SubmitField, Required, ValidationError, validators
 from flaskext.mail import Mail
 import os
+from quotrdb import Operators, Quotes
 #-------------------------------------------------------------------------------
 
 # create our  application :)
@@ -46,7 +47,7 @@ mail = Mail(app)
 #-----------------------All forms are defined here------------------------------
 
 
-class EntryForm(form):
+class EntryForm(Form):
     
     body = TextField("Body")
     tags = TextField("Tags")
@@ -56,19 +57,17 @@ class EntryForm(form):
 
 class LoginForm (Form):
     
-    username = TextField("Email")
+    email = TextField("Email")
     password = PasswordField("Password")
     submit = SubmitField("Login")
     
-    
-    def validate_username(self,username):
-        access_user = User.query.filter_by(email = username.data).first()
+    def validate_email(self,email):
+        access_user = Operators.query.filter_by(email = email.data).first()
         if access_user is None:
             raise ValidationError, "Invalid Username"
 
-
     def validate_password(self,password):
-        access_user = User.query.filter_by(email = self.username.data).first()
+        access_user = Operators.query.filter_by(email = self.email.data).first()
         if access_user is None:
             raise ValidationError, "Invalid Username"
         else:
@@ -76,22 +75,17 @@ class LoginForm (Form):
         if not condition:
             raise ValidationError, "Invalid Password"
     
-#this is the registeration form
 class RegisterationForm (Form):
 
-    #email field: Mandatory
     email = TextField("Email Address", [validators.Length(min=6)])
+    password = PasswordField("New Password", 
+                            [
+                            validators.Required(),
+                            validators.EqualTo('confirm', 
+                            message='Passwords must match')
+                            ])
     
-    #password field: Mandatory
-    password = PasswordField("New Password", [
-        validators.Required(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    
-    #confirm password field: Mandatory
     confirm = PasswordField('Repeat Password')
-        
-
     submit = SubmitField("Register")   
     
     #querying for known entries for the given email    
@@ -100,10 +94,7 @@ class RegisterationForm (Form):
         if unidentified is not None:
             raise ValidationError, "Username already exists"
      
-     
-     
-#-----------------------------database related actions--------------------------
-
+#---------------------------database related actions----------------------------
 
 def connect_db():
     """Returns a new connection to the database."""
@@ -114,14 +105,13 @@ def before_request():
     """Make sure we are connected to the database each request."""
     g.db = connect_db()
 
-
 @app.after_request
 def after_request(response):
     """Closes the database again at the end of the request."""
     g.db.close()
     return response
 
-#----------------------------decorators start here------------------------------
+#---------------------------decorators start here-------------------------------
 
 @app.route('/')
 def index():
@@ -131,7 +121,5 @@ def index():
 def login():
     return render_template('login.html')
    
-    
-    
 if __name__ == '__main__':
     app.run()
