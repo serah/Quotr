@@ -42,9 +42,17 @@ app.config.from_object(appconf)
 bcrypt_init(app)
 mail = Mail(app)
 
-#all functions need to have to be imported from Base class or SVNfunctions() class
 
 #-----------------------All forms are defined here------------------------------
+
+
+class EntryForm(form):
+    
+    body = TextField("Body")
+    tags = TextField("Tags")
+    by   = TextField("Posted by:",[ validators.Required() ])
+    submit = SubmitField("Submit")
+    
 
 class LoginForm (Form):
     
@@ -68,12 +76,6 @@ class LoginForm (Form):
         if not condition:
             raise ValidationError, "Invalid Password"
     
-    def validate_user(self,username):
-        access_user = User.query.filter_by(email = username.data).first()
-        if not access_user.active:
-            raise ValidationError, "User not Active"
-
-
 #this is the registeration form
 class RegisterationForm (Form):
 
@@ -89,17 +91,6 @@ class RegisterationForm (Form):
     #confirm password field: Mandatory
     confirm = PasswordField('Repeat Password')
         
-    #name of the user: Non Mandatory
-    Name = TextField("Your full name")
-    
-    #nick name of the user: Non Mandatory
-    Nickname = TextField("Your nick name")
-    
-    #vcs_username of the user: Non Mandatory
-    VCS_Username = TextField("Your VCS Username")
-    
-    #vcs_password of the user: Non mandatory
-    VCS_Password = PasswordField("Your VCS Password")
 
     submit = SubmitField("Register")   
     
@@ -132,11 +123,14 @@ def after_request(response):
 
 #----------------------------decorators start here------------------------------
 
-@app.conf('/')
+@app.route('/')
 def index():
     return render_template('index.html')
     
-    
+@app.route('/login')
+def login():
+    return render_template('login.html')
+   
     
     
 if __name__ == '__main__':
