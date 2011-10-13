@@ -1,0 +1,80 @@
+body
+{
+    padding: 0;
+}
+
+.login
+{
+    margin-top: 0 auto;
+    margin-bottom: 0 auto;
+    padding-top: 30px;
+}
+
+.header_new
+{
+    background-color: #eee;
+    min-height: 10px;
+    margin: none;
+    overflow: hidden;
+    padding-top: 20px;
+    background-repeat: repeat-x;
+    
+}
+
+.page-header
+{
+    border-bottom: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.simple_nav
+{
+    list-style-type: none;
+    float: left;
+}
+
+.second_nav
+{
+    float: right;
+}
+
+.header_new a
+{
+    color: #333;
+    font-size: 15px;
+    outline: none;
+    border: none;
+}
+
+.nostyle
+{
+    list-style-type: none;
+}
+
+
+.independent
+{
+    padding-top: 20px;
+
+}
+.header_new li
+{
+    display: inline;
+    padding-right: 20px;
+}
+
+.content
+{
+    padding-top: 20px;
+}
+
+.span16
+{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.span11
+{
+    padding-top: 10px;
+}

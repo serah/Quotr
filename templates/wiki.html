@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <div class="content">
+    <div class="container">
+      
+        
+        <div class="page-header">
+          <h1>Quotr<small> Wiki</small></h1>
+        </div><!-- page header ends -->
+        
+       <section id="Topics">
+        <div class="row"> 
+         <div class="span16">
+           <div class="well">
+             <h3>Topics</h3>
+             <ol>
+               <li><a href="#Introduction">Introduction</a></li>
+               <li><a href="#">Requirements</a></li>
+               <li><a href="#">Setup Quotr</a></li>
+               <li><a href="#">Security stuff </a></li>
+               <li><a href="#">Adding users</a></li>
+             </ol>
+            </div><!-- end well -->  
+           </div><!--end span16-->
+         </div><!--end row--> 
+       </section>
+       
+          <section id="Introduction">
+            
+              <div class="page-header">
+                <h2>Introduction<small> Quotr in a nutshell</small></h2>
+              </div><!-- page header ends -->
+              <div class="row">
+              <div class="span5">
+                <span class="label notice">Keywords</span>
+                  <ul class="nostyle">
+                    <li><span class="label ">Quote Management</span></li>
+                    <li><span class="label ">Python</span></li>
+                    <li><span class="label ">Flask</span></li>
+                    <li><span class="label ">Features</span></li>
+                    <li><span class="label ">Linux</span></li>
+                  </ul>                 
+              </div><!-- span 5 ends -->
+              
+              <div class="span11">
+                <p>Quotr can be used to manage all types of quotes. It was built to manage IRC conversations. A good example of quote management system
+                is <a href="http://bash.org">bash.org</a>. Quotr is built on Python and uses the Flask microframework. It was developed on a Linux system
+                and therefore works best with it. Quotr gives the manager the ability to add or remove users.</p>
+              </div><!-- span11 ends -->
+             </div> 
+          </section>
+          
+      
+    </div><!-- end container -->
+  </div><!-- end content  -->
+{% endblock %}

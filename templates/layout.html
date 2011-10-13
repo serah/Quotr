@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Quotr</title>
+    <title>Quotr</title><!----------------------------------------------------------------------------->
     <meta name="description" content="Quotr, Quote manager">
     <meta name="author" content="Pronoy Chopra">
 
@@ -12,8 +12,8 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap-main.css') }}">
-    <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <!--<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>-->
     <script src="{{ url_for('static', filename='js/bootstrap-dropdown.js') }}""></script>
     <script src="{{ url_for('static', filename='js/bootstrap-twipsy.js') }}""></script>
     <script src="{{ url_for('static', filename='js/bootstrap-scrollspy.js') }}""></script>
@@ -39,39 +39,54 @@
     
     {% block topbar%}
       <!-- place where the top bar will be kept -->
-      
-      
-      <div class="topbar-wrapper" data-scrollspy="scrollspy" style="z-index: 5;">
-        <div class="topbar" data-dropdown="dropdown" >
-          <div class="fill">
+          <div class="header_new">
             <div class="container">
+            <ul class="simple_nav">
+              <li><a href="{{ url_for('index') }}">Home</a></li>
               
-                
-            </div><!-- container -->
-          </div> <!-- fill -->
-        </div><!-- topbar -->
-      </div><!-- topbar wrapper-->
+              <li><a href="{{ url_for('submit_quote') }}">Submit</a></li>
+              
+              <li><a href="{{ url_for('queue') }}">Q</a></li>
+              
+              <li><a href="{{ url_for('tags') }}">Tags</a></li>
+              
+              <li><a href="{{ url_for('wiki') }}">Wiki</a></li>
+            </ul>
+            
+            <ul class="second_nav">
+            {% if not session.logged_in %}
+              <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% else %}
+              <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+            </ul>
+            </div>
+          </div><!-- header ends -->
+          
+          
+    {% endblock %}
+
+
+
+
+
+<!-- ----------------------------------------------------------------------- -->
+      {%  block marketing %}
+      
+      {% endblock %}
+<!-- ----------------------------------------------------------------------- -->    
+    {% block body %}
       
     {% endblock %}
     
-    
-    {% if not session.logged_in %} <!-- if not logged in -->
-    {% block intro%} <!-- show the intro and about block -->
-   
-    {% endblock %}
-    
-    {% else %} <!-- if logged in -->
-    
-    {% block body %} <!-- show individual page body -->
-    {% endblock %}
-    
-    {% endif %}
-    <footer class="footer">
-      <div class="container">
+      <footer>
+     
+        <div class="container">
         <p>Designed and built by <a href="http://pronoy.in">@pronoyc</a> <br /></p>
-      </div>
-    </footer>
-
+        <p><small>When he was supposed to be working</small></p>
+        </div>
+      
+      </footer>
   </body>
 </html>
 

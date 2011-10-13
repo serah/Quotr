@@ -51,7 +51,7 @@ class EntryForm(Form):
     
     body = TextField("Body")
     tags = TextField("Tags")
-    by   = TextField("Posted by:",[ validators.Required() ])
+    by   = TextField("Posted by:", [validators.Required()])
     submit = SubmitField("Submit")
     
 
@@ -59,7 +59,10 @@ class LoginForm (Form):
     
     email = TextField("Email")
     password = PasswordField("Password")
-    submit = SubmitField("Login")
+    login = SubmitField("Login")
+    
+    forgotpass = TextField("Forgot Password?")
+    forgot_submit = SubmitField("Submit")
     
     def validate_email(self,email):
         access_user = Operators.query.filter_by(email = email.data).first()
@@ -117,9 +120,40 @@ def after_request(response):
 def index():
     return render_template('index.html')
     
-@app.route('/login')
-def login():
-    return render_template('login.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login(): 
+    form = LoginForm(request.form)
+    if form.validate_on_submit():
+        session['logged_in'] = True
+        session['username'] = form.username.data
+        if session['logged_in']:
+            flash('You were logged in as '+ session['username'])
+        else:
+            flash('oops you were not logged in')
+        return redirect(url_for('server_status'))
+    return render_template('login.html', form=form)
+    
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash('logged out')
+    return redirect(url_for('index')) 
+    
+@app.route('/submit')
+def submit_quote():
+    return render_template('submit.html')
+    
+@app.route('/q')
+def queue():
+    return render_template('queue.html')
+
+@app.route('/tags')
+def tags():
+    return render_template('tags.html')
+
+@app.route('/wiki')
+def wiki():
+    return render_template('wiki.html')
    
 if __name__ == '__main__':
     app.run()
