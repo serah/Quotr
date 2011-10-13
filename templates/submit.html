@@ -4,15 +4,37 @@
     <div class="container">
       <div class="row">
         <div class="page-header">
-          <h1>Quotes<small> a comprehensive guide to fail</small></h1>
+          <h1>Quote<small> submission</small></h1>
         </div><!-- page header ends -->
-        <div class="span5">
-          <h3>Panel</h3>
-          <p>This is where you upvote or downvote them quotes</p>
-          <button class="btn primary">Good one</button>
-        </div>
-        <div class="span11">
-        </div>
+        
+        <section id="">
+          
+          <div class="span11">
+            <div class="page-header">
+              <h3>Submit <small> your conversations and hit submit<small></h3>
+            </div><!-- page-header ends -->
+            <p></p>
+            {{ form.body(class="input", class="span11", rows="5" , placeholder="Enter your quote here") }}
+            <br /><p></p>
+            {{ form.by(class="input", class="span11", placeholder="Submitted by") }}
+            <p></p>
+            {{ form.submit(class="btn primary")}}
+          </div><!-- span11 ends here -->
+          
+          <div class="span5">
+            <div class="page-header">
+              <h3>Tags <small> be sure to enter certain keywords<small></h3>
+            </div><!-- page-header ends -->
+            <p></p>
+            {{ form.tags(class="input", class="span5", placeholder="Enter keywords relevant to the quote separated by commas", rows="5")}}
+            <p></p>
+            <p class="justified_text">Example 
+            <span class="label warning">Superman</span> <span class="label">Pizza</span>
+            <span class="label important">Jesus</span> <span class="label success">Keyboard</span></p>
+          </div><!-- span5 ends -->
+          
+        </section><!-- section ends-->
+        
       </div><!-- end row -->
     </div><!-- end container -->
   </div><!-- end content  -->
