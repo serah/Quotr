@@ -47,8 +47,6 @@ mail = Mail(app)
 
 #-----------------------All forms are defined here------------------------------
 
-
-
      
 #---------------------------database related actions----------------------------
 
@@ -97,6 +95,11 @@ def submit_quote():
     form = EntryForm(request.form)
         
     return render_template('submit.html',form=form)
+    
+@app.route('/quote/<int:quote_id>')
+def show_quote(quote_id):
+    return render_template('quote.html')
+
     
 @app.route('/q')
 def queue():

@@ -6,7 +6,7 @@
       
         
         <div class="page-header">
-          <h1>Quotr<small> Wiki</small></h1>
+          <h3>Quotr <small>wiki</small></h3>
         </div><!-- page header ends -->
         
        <section id="Topics">
@@ -16,8 +16,8 @@
              <h3>Topics</h3>
              <ol>
                <li><a href="#Introduction">Introduction</a></li>
-               <li><a href="#">Requirements</a></li>
-               <li><a href="#">Setup Quotr</a></li>
+               <li><a href="#Requirements">Requirements</a></li>
+               <li><a href="#Setup">Setup</a></li>
                <li><a href="#">Security stuff </a></li>
                <li><a href="#">Adding users</a></li>
              </ol>
@@ -33,23 +33,94 @@
               </div><!-- page header ends -->
               <div class="row">
               <div class="span5">
-                <span class="label notice">Keywords</span>
-                  <ul class="nostyle">
-                    <li><span class="label ">Quote Management</span></li>
-                    <li><span class="label ">Python</span></li>
-                    <li><span class="label ">Flask</span></li>
-                    <li><span class="label ">Features</span></li>
-                    <li><span class="label ">Linux</span></li>
-                  </ul>                 
+              <p></p>
+                 <span class="label notice">Keywords</span>
+                    <p><span class="label ">Introduction</span>
+                    <span class="label ">Python</span>
+                    <span class="label ">Flask</span>
+                    <span class="label ">Features</span>
+                    <span class="label ">Linux</span></p>
               </div><!-- span 5 ends -->
               
               <div class="span11">
-                <p>Quotr can be used to manage all types of quotes. It was built to manage IRC conversations. A good example of quote management system
-                is <a href="http://bash.org">bash.org</a>. Quotr is built on Python and uses the Flask microframework. It was developed on a Linux system
-                and therefore works best with it. Quotr gives the manager the ability to add or remove users.</p>
+                <p class="justified_text"></p>
               </div><!-- span11 ends -->
              </div> 
           </section>
+          
+      
+          <section id="Requirements">
+            
+              <div class="page-header">
+                <h2>Requirements<small> what you'll need</small></h2>
+              </div><!-- page header ends -->
+              <div class="row">
+              <div class="span5">
+              <p></p>
+                 <span class="label notice">Keywords</span>
+                    <p><span class="label ">Requirements</span>
+                    <span class="label ">Linux</span>
+                    <span class="label ">Python2.6</span>
+                    <span class="label ">Flask</span>
+                    <span class="label ">Flask-SQLAlchemy</span>
+                    <span class="label ">Flask-Bcrypt</span>
+                    <span class="label ">Flask-WTF</span>
+                    <span class="label ">SQLite3</span>
+                    <span class="label ">Tutorials</span>
+                    <span class="label ">Argparser</span></p>
+              </div><!-- span 5 ends -->
+              
+              <div class="span11">
+                <p class="justified_text">You'll require any Linux System with Python 2.6 running to get Quotr setup. 
+                If you have a preinstalled version of Python say anything other than 2.6 you can install it in a localized 
+                location and trigger all Quotr functions using the new version of Python. In order to do that check out 
+                <a href="">localized python install</a></p>
+                <p>Apart from basic Python you'll require:
+                <ol>
+                  <li>Flask</li>
+                  <li>Flask-SQLAlchemy</li>
+                  <li>Flask-Bcrypt</li>
+                  <li>Flask-WTF</li>
+                  <li>Py-SQLite3</li>
+                  <li>Argparser</li>
+                </ol>
+                Please install the latest versions. <a href="">Here's a short tutorial</a> on working with pip to install these modules.
+                If you require there is a complete dependency setup script which can be downloaded from <a href="">here</a>.
+                </p>
+              </div><!-- span11 ends -->
+             </div> 
+          </section>
+          
+          
+          <section id="Setup">
+            
+              <div class="page-header">
+                <h2>Setup<small> installing Quotr</small></h2>
+              </div><!-- page header ends -->
+              <div class="row">
+              <div class="span5">
+              <p></p>
+                 <span class="label notice">Keywords</span>
+                    <p><span class="label ">Setup</span>
+                    <span class="label ">Command line</span>
+                    <span class="label ">Database</span>
+              </div><!-- span 5 ends -->
+              
+              <div class="span11">
+                <p class="justified_text">
+                Quick installation of Quotr wiki requires some commandline work. But don't worry. It's as easy as it gets.
+                
+                <pre class="prettyprint linenums">
+                  <ol class="linenums">
+                    <li>python websetup.py -h</li>
+                  </ol>
+              
+                </pre>
+                </p>
+              </div><!-- span11 ends -->
+             </div> 
+          </section>
+          
           
       
     </div><!-- end container -->
