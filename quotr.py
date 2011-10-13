@@ -49,8 +49,8 @@ mail = Mail(app)
 
 class EntryForm(Form):
     
-    body = TextField("Body")
-    tags = TextField("Tags")
+    body = TextAreaField("Body")
+    tags = TextAreaField("Tags")
     by   = TextField("Posted by:", [validators.Required()])
     submit = SubmitField("Submit")
     
@@ -139,9 +139,11 @@ def logout():
     flash('logged out')
     return redirect(url_for('index')) 
     
-@app.route('/submit')
+@app.route('/submit', methods=['GET','POST'])
 def submit_quote():
-    return render_template('submit.html')
+    form = EntryForm(request.form)
+        
+    return render_template('submit.html',form=form)
     
 @app.route('/q')
 def queue():
