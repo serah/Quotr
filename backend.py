@@ -27,8 +27,13 @@ def separate_tags(field):
     
 def check_if_database_up():
     q = glob.glob("*.db")
-    if not q.__sizeof__() == 20:
-        return True
+    if not q:
+        return False
     else:
-        return False,
-    
+        return True
+
+def check_size():
+    name = glob.glob("*.db")
+    if name:
+        size = os.path.getsize(name[0])
+        return size

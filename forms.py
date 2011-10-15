@@ -27,7 +27,7 @@ class LoginForm (Form):
     password = PasswordField("Password")
     login = SubmitField("login")
 
-    """
+    
     def validate_password(self,password):
         access_user = Operators.query.filter_by(email = self.email.data).first()
         if access_user is None:
@@ -37,7 +37,7 @@ class LoginForm (Form):
         if not condition:
             raise ValidationError, "Invalid Password"
       
-    """  
+      
             
 class RegisterationForm(Form):
     

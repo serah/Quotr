@@ -9,9 +9,11 @@
         
         
         {% if not error %}
-        {% for q in quote %}
+        
+        {% for q in quotes %}
         <p>&nbsp;</p>
         <!-- <div class="well"> -->
+        {% if q.active %}
           <div class="page-header">
             <h2><a href="/quote/{{ q.id }}">#{{ q.id|safe }}</a></h2>
           </div>
@@ -21,17 +23,23 @@
           </div>
           <p><h5>Submitted by: <small>{{ q.by }}</small></h5></p>
           <p><span class="label notice">Tags:</span> <span class="label warning">{{ q.tags|safe }}</span></p>
+        {% endif %}
         {% endfor %}
+        
+        
         {% else %}
         <p>&nbsp;</p>
          <div class="alert-message block-message error">
           <p><strong>{{ error }}</strong></p>
-          <p>It turns out that there are no quotes in the database at all at this moment.
-          You will probably need to go and submit some. How about now? Seems like a good time, doesn't it?</p>
+          <p>It turns out that there are no active quotes to display at this moment.
+          You will probably need to go and submit some. <strong>If you've already submitted one and it does not show up</strong> here
+          it's probably because you need to approve it in the Queue.</p>
           <br />
           <a href="{{ url_for('submit_quote') }}" class="btn primary large">Yeah, hang on. Let me fill 'er up</a>
+          <a href="{{ url_for('queue') }}" class="btn primary large">Oh wait, let me check the Q first</a>
          <!-- </div> -->
          </div>
+         
         {% endif%}
 
         
