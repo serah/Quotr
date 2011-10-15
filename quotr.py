@@ -29,8 +29,9 @@ from flaskext.wtf import Form, TextField, TextAreaField, PasswordField, \
     SubmitField, Required, ValidationError, validators
 from flaskext.mail import Mail
 import os
-from quotrdb import Operators, Quotes
-from forms import EntryForm, LoginForm, RegisterationForm
+from quotrdb import Operators, Quotes, db
+from forms import RegisterationForm, LoginForm, EntryForm
+from backend import preserve_whitespace, separate_tags, check_if_database_up
 #-------------------------------------------------------------------------------
 
 # create our  application :)
@@ -46,8 +47,7 @@ mail = Mail(app)
 
 
 #-----------------------All forms are defined here------------------------------
-
-     
+#forms.py
 #---------------------------database related actions----------------------------
 
 def connect_db():
@@ -69,49 +69,96 @@ def after_request(response):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-    
-@app.route('/login', methods=['GET', 'POST'])
-def login(): 
-    form = LoginForm(request.form)
-    if form.validate_on_submit():
-        session['logged_in'] = True
-        session['username'] = form.username.data
-        if session['logged_in']:
-            flash('You were logged in as '+ session['username'])
+    db_condition =  check_if_database_up()
+    if db_condition:
+        return render_template('oops.html')
+    else:
+        quote = Quotes.query.order_by(Quotes.id.desc()).all()
+        if quote.__sizeof__() == 20:
+            error = 'Nothing to see here. Move along'
         else:
-            flash('oops you were not logged in')
-        return redirect(url_for('server_status'))
-    return render_template('login.html', form=form)
+            error = False
+        return render_template('index.html',quote=quote,error=error)
+
+#debug
+"""
+@app.route('/register', methods=['GET','POST'])
+def register():
+    form = RegisterationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        
+        password_hash = generate_password_hash(form.password.data)
+        
+        new_user = Operators(form.email.data, password_hash,form.nick.data)
+        db.session.add(new_user)
+        db.session.commit()
+        
+        #check if user was registered 
+    return render_template('register.html', form=form)
+"""
+#debug ends
+    
+@app.route('/submit', methods=['GET','POST'])
+def submit_quote():
+    db_condition =  check_if_database_up()
+    if db_condition:
+        return render_template('oops.html')
+    else:
+        form = EntryForm(request.form)
+        if request.method=='POST':
+            new_body = preserve_whitespace(form.body.data)
+            new_quote = Queue(new_body,form.tags.data,form.by.data,False)
+            db.session.add(new_quote)
+            db.session.commit()
+            return redirect(url_for('index'))
+        return render_template('submit.html',form=form)
+    
+@app.route('/quote/<quote_id>')
+def show_quote(quote_id):
+    db_condition =  check_if_database_up()
+    if db_condition:
+        return render_template('oops.html')
+    else:
+        specific = Quotes.query.get_or_404(quote_id)
+        return render_template('quote.html',specific=specific)
+    
+@app.route('/q')
+def queue():
+    db_condition =  check_if_database_up()
+    if db_condition:
+        return render_template('oops.html')
+    else:
+        return render_template('queue.html')
+
+@app.route('/tags')
+def tags():
+    db_condition =  check_if_database_up()
+    if db_condition:
+        return render_template('oops.html')
+    else:
+        return render_template('tags.html')
+
+@app.route('/wiki')
+def wiki():
+    return render_template('wiki.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    db_condition =  check_if_database_up()
+    if db_condition:
+        return render_template('oops.html')
+    else:
+        form = LoginForm(request.form)
+        if form.validate_on_submit():
+            session['logged_in'] = True
+            return redirect(url_for('index'))
+        return render_template('login.html', form=form)
     
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
     flash('logged out')
     return redirect(url_for('index')) 
-    
-@app.route('/submit', methods=['GET','POST'])
-def submit_quote():
-    form = EntryForm(request.form)
-        
-    return render_template('submit.html',form=form)
-    
-@app.route('/quote/<int:quote_id>')
-def show_quote(quote_id):
-    return render_template('quote.html')
-
-    
-@app.route('/q')
-def queue():
-    return render_template('queue.html')
-
-@app.route('/tags')
-def tags():
-    return render_template('tags.html')
-
-@app.route('/wiki')
-def wiki():
-    return render_template('wiki.html')
    
 if __name__ == '__main__':
     app.run()

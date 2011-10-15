@@ -5,25 +5,30 @@
   <div class="container">
     <div class="hero-unit">
       <div class="page-header">
-        <h2>Login<small> because there is no spoon </small></h2>
+        <h2>Login<small> and don't look back </small></h2>
       </div>
       <p></p>
       <div class="clearfix">
-        {{ form.email(class="input", placeholder= "Email") }}
+        <form action="{{ url_for('login') }}" method=post>
+        {{ form.email(placeholder= "Email") }}
         <br /><p></p>
-        {{ form.password(class="input", placeholder="Password") }}
+        {{ form.password(placeholder="Password") }}
         <br /><p></p>        
         {{ form.login(class="btn primary") }}
+        </form>
       </div>
+      <!--
       <p>&nbsp;</p>
       <div class="page-header">
         <h2>Forgot Password?<small> Enter your email and hit submit </small></h2>
       </div>
       <p></p>      
-      <div class="clearfix">
-        {{ form.forgotpass(class="input",placeholder="Email") }}
-        <br /><p></p>
-        {{ form.forgot_submit(class="btn primary") }}
+      <div class="clearfix"> 
+      {# 
+        {{  form.forgotpass(class="input",placeholder="Email") }} 
+         <br /><p></p> 
+        {{  form.submit(class="btn primary")  }}
+      #} -->
       </div>
 
     </div><!-- hero unit ends -->  

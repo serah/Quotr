@@ -6,6 +6,35 @@
         <div class="page-header">
           <h1>Quotes<small> a comprehensive guide to fail</small></h1>
         </div><!-- page header ends -->
+        
+        
+        {% if not error %}
+        {% for q in quote %}
+        <p>&nbsp;</p>
+        <!-- <div class="well"> -->
+          <div class="page-header">
+            <h2><a href="/quote/{{ q.id }}">#{{ q.id|safe }}</a></h2>
+          </div>
+          <p>&nbsp;</p>
+          <div class="page-header">
+            {{ q.body|safe }}
+          </div>
+          <p><h5>Submitted by: <small>{{ q.by }}</small></h5></p>
+          <p><span class="label notice">Tags:</span> <span class="label warning">{{ q.tags|safe }}</span></p>
+        {% endfor %}
+        {% else %}
+        <p>&nbsp;</p>
+         <div class="alert-message block-message error">
+          <p><strong>{{ error }}</strong></p>
+          <p>It turns out that there are no quotes in the database at all at this moment.
+          You will probably need to go and submit some. How about now? Seems like a good time, doesn't it?</p>
+          <br />
+          <a href="{{ url_for('submit_quote') }}" class="btn primary large">Yeah, hang on. Let me fill 'er up</a>
+         <!-- </div> -->
+         </div>
+        {% endif%}
+
+        
       </div><!-- end row -->
     </div><!-- end container -->
   </div><!-- end content  -->

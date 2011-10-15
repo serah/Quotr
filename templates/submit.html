@@ -14,9 +14,10 @@
               <h3>Submit <small> your conversations and hit submit<small></h3>
             </div><!-- page-header ends -->
             <p></p>
-            {{ form.body(class="input", class="span11", rows="5" , placeholder="Enter your quote here") }}
+            <form action="{{ url_for('submit_quote') }}" method=post>
+            {{ form.body( class="span11", rows="5" , placeholder="Enter your quote here")|safe }}
             <br /><p></p>
-            {{ form.by(class="input", class="span11", placeholder="Submitted by") }}
+            {{ form.by( class="span11", placeholder="Submitted by")|safe }}
             <p></p>
             {{ form.submit(class="btn primary")}}
           </div><!-- span11 ends here -->
@@ -26,7 +27,8 @@
               <h3>Tags <small> be sure to enter certain keywords<small></h3>
             </div><!-- page-header ends -->
             <p></p>
-            {{ form.tags(class="input", class="span5", placeholder="Enter keywords relevant to the quote separated by commas", rows="5")}}
+            {{ form.tags( class="span5", placeholder="Enter keywords relevant to the quote separated by commas", rows="5")|safe }}
+            </form>
             <p></p>
             <p class="justified_text">Example 
             <span class="label warning">Superman</span> <span class="label">Pizza</span>

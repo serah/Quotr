@@ -23,7 +23,6 @@ body
 .page-header
 {
     border-bottom: 1px solid #eee;
-    padding-top: 20px;
 }
 
 .simple_nav
@@ -99,4 +98,9 @@ body
 .justified_text
 {
     text-align: justify;
+}
+
+section
+{
+    padding-top: 30px;
 }

@@ -15,31 +15,47 @@ class Quotes (db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     body = db.Column(db.Text)
     tags = db.Column(db.Text)
+    by = db.Column(db.Text)
+    active = db.Column(db.Boolean)
+
+    def __init__(self,body,tags,by,active):
+        self.body = body
+        self.tags = tags
+        self.by = by
+        self.active = active
+"""
+class Queue (db.Model):
+    
+    __tablename__ = 'queue'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    body = db.Column(db.Text)
+    tags = db.Column(db.Text)
     active = db.Column(db.Boolean)
     by = db.Column(db.Text)
 
-    def __init__(self,body,tags,active,by):
+    def __init__(self,body,tags,by,active):
         self.body = body
         self.tags = tags
-        self.active = active
         self.by = by
-        
+        self.active = active
+"""
         
 class Operators (db.Model):
     
-    __tablename__ = 'admins'
+    __tablename__ = 'operators'
     
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-    username = db.Column(db.Text)
+    nick = db.Column(db.Text)
     email = db.Column(db.Text)
-    
+    password = db.Column(db.Text)
 
-    def __init__(self,username,email):
-        self.username = username
+    def __init__(self,email,password,nick):
+        self.nick = nick
         self.email = email
+        self.password = password
 
 
 #create the database by db.create_all()
-#if database is present, it won't be overwritten
+#if database is present, it will be overwritten
 def init_db():
     db.create_all()

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="page-header">
+          <h1>Halt! <small>wanna join the club?</small></h1>
+        </div><!-- page header ends -->
+      
+          
+        <section id="Register">
+          <div class="span5">
+            <div class="page-header">
+              <h3>Register here</h3>
+            </div>
+            <form class="form-stacked" action="{{ url_for('register') }}" method=post>
+            <fieldset>
+            {{ form.email( placeholder="Email") }}
+            <br /><p></p>
+            {{ form.password(placeholder="Password") }}
+            <br /><p></p>
+            {{ form.confirm(placeholder="Confirm Password") }}
+            <br /><p></p>
+            {{ form.nick(placeholder="Nick") }}
+            <br /><p></p>
+            {{ form.submit(class="btn primary") }}
+            </fieldset>
+            </form>
+            </div>
+            <div class="span11">
+              <div class="page-header">
+                <h3>Instructions <small>they're important</small></h3>
+              </div>
+              <p></p>
+            </div>
+        </section>
+        
+      </div><!-- end row -->
+    </div><!-- end container -->
+  </div><!-- end content  -->
+{% endblock %}

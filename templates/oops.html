@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="page-header">
+          <h1>Fatality!<small> but before you finish him...</small></h1>
+        </div><!-- page header ends -->
+        <p>&nbsp;</p>
+        <div class="alert-message block-message error">
+          
+            <h3>Please setup the database</h3>
+            <p>There seems to be an error. Quotr needs a Database to function.
+            The Database is the place where all your quotes are stored. Kindly,
+            click on the button below and learn how to setup the Database.</p>
+            <p>&nbsp;</p>
+            <p><a href="{{ url_for('wiki') }}#Setup" class="btn primary large">Here's how you do it.</a></p>
+          
+        </div>
+        
+      </div><!-- end row -->
+    </div><!-- end container -->
+  </div><!-- end content  -->
+{% endblock %}
