@@ -108,7 +108,7 @@ def submit_quote():
             form = EntryForm(request.form)
             if request.method=='POST':
                 new_body = preserve_whitespace(form.body.data)
-                new_quote = Quotes(new_body,form.tags.data,form.by.data,True)
+                new_quote = Quotes(new_body,form.tags.data,form.by.data,False)
                 db.session.add(new_quote)
                 db.session.commit()
                 return redirect(url_for('index'))
@@ -150,6 +150,14 @@ def tags():
 @app.route('/wiki')
 def wiki():
     return render_template('wiki.html')
+
+@app.route('/wiki/tutorials')
+def tutorials():
+    return render_template('tutorials.html')
+    
+@app.route('/wiki/scripts')
+def scripts():
+    return render_template('scripts.html')    
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
