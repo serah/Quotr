@@ -79,7 +79,7 @@ def index():
                 error = 'Nothing to see here. Move along'
             else:
                 error = ''
-                return render_template('index.html',quotes=quotes,error=error)
+            return render_template('index.html',quotes=quotes,error=error)
 
 #debug
 """
