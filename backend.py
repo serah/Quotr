@@ -19,6 +19,8 @@ def check_if_user_present(user):
 
 #keeps the whitespaces in field
 def preserve_whitespace(field):
+    field = field.replace('<','&lt;')
+    field = field.replace('>','&gt;')
     new_field_data = '<pre>'+field+'</pre>'
     return new_field_data
     
