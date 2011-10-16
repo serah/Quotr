@@ -29,14 +29,13 @@
         
         {% else %}
         <p>&nbsp;</p>
-         <div class="alert-message block-message error">
+         <div class="alert-message block-message warning">
           <p><strong>{{ error }}</strong></p>
           <p>It turns out that there are no active quotes to display at this moment.
           You will probably need to go and submit some. <strong>If you've already submitted one and it does not show up</strong> here
           it's probably because you need to approve it in the Queue.</p>
           <br />
           <a href="{{ url_for('submit_quote') }}" class="btn primary large">Yeah, hang on. Let me fill 'er up</a>
-          <a href="{{ url_for('queue') }}" class="btn primary large">Oh wait, let me check the Q first</a>
          <!-- </div> -->
          </div>
          

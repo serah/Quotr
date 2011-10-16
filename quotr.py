@@ -74,7 +74,7 @@ def index():
         if check_size() == 0:
             return render_template('oops.html')
         else:
-            quotes = Quotes.query.order_by(Quotes.id.desc()).all()
+            quotes = Quotes.query.order_by(Quotes.id.desc())
             if not quotes:
                 error = 'Nothing to see here. Move along'
             else:
@@ -166,9 +166,17 @@ def login():
             return render_template('oops.html')
         else:
             form = LoginForm(request.form)
-            if form.validate_on_submit():
-                session['logged_in'] = True
-                return redirect(url_for('index'))
+            if request.method=='POST':
+                check_user = Operators.query.filter_by(email=form.email.data).first()
+                if check_user:
+                    pass_check = check_password_hash(check_user.password,form.password.data)
+                    if pass_check:
+                        session['logged_in'] = True
+                        return redirect(url_for('index'))
+                    else:
+                        flash('Incorrect Password')
+                else:
+                    flash('Incorrect Username')          
             return render_template('login.html', form=form)
         
 @app.route('/logout')

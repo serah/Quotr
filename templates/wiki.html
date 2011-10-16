@@ -1,4 +1,13 @@
 {% extends "layout.html" %}
+
+{% block extrajs %}
+  <script src="assets/js/google-code-prettify/prettify.js"></script>
+{% endblock %}
+
+{% block js_functions %}
+  
+{% endblock %}
+
 {% block body %}
 
   <div class="content">
@@ -20,8 +29,7 @@
                <li><a href="#Introduction">Introduction</a></li>
                <li><a href="#Requirements">Requirements</a></li>
                <li><a href="#Setup">Setup</a></li>
-               <li><a href="#">Security stuff </a></li>
-               <li><a href="#">Adding users</a></li>
+               <li><a href="#Security">Security issues</a></li>
              </ol>
             </div><!-- end well -->  
            </div><!--end span16-->
@@ -35,7 +43,6 @@
               </div><!-- page header ends -->
               <div class="row">
               <div class="span5">
-              <p></p>
                  <span class="label notice">Keywords</span>
                     <p><span class="label ">Introduction</span>
                     <span class="label ">Python</span>
@@ -46,7 +53,12 @@
               
               <div class="span11">
                 <p class="justified_text">
-                
+                Quotr is a Quote Management System. It is used primarily for managing IRC conversations. You can check the
+                example of a QMS at <a href="http://www.bash.org">bash.org</a>. Quotr is user friendly. Clean, minimal and
+                easy to use. Since it is made in python it is as secure as the server you're running it on. Quotr works only
+                on Linux for now. It will be ported to Windows as soon as Python for Windows supports certain modules or
+                equivalent libraries are found. Quotr aims to keep things simple, before and after setup. Especially during
+                setup.
                 </p>
               </div><!-- span11 ends -->
              </div> 
@@ -60,25 +72,23 @@
               </div><!-- page header ends -->
               <div class="row">
               <div class="span5">
-              <p></p>
                  <span class="label notice">Keywords</span>
                     <p><span class="label ">Requirements</span>
-                    <span class="label ">Linux</span>
-                    <span class="label ">Python2.6</span>
-                    <span class="label ">Flask</span>
-                    <span class="label ">Flask-SQLAlchemy</span>
-                    <span class="label ">Flask-Bcrypt</span>
-                    <span class="label ">Flask-WTF</span>
-                    <span class="label ">SQLite3</span>
-                    <span class="label ">Tutorials</span>
-                    <span class="label ">Argparser</span></p>
+                    <a href=""><span class="label ">Linux</span></a>
+                    <a href=""><span class="label ">Python2.6</span></a>
+                    <a href=""><span class="label ">Flask</span></a>
+                    <a href=""><span class="label ">Flask-SQLAlchemy</span></a>
+                    <a href=""><span class="label ">Flask-Bcrypt</span></a>
+                    <a href=""><span class="label ">Flask-WTF</span></a>
+                    <a href=""><span class="label ">SQLite3</span></a>
+                    <a href=""><span class="label ">Tutorials</span></a>
               </div><!-- span 5 ends -->
               
               <div class="span11">
                 <p class="justified_text">You'll require any Linux System with Python 2.6 running to get Quotr setup. 
                 If you have a preinstalled version of Python say anything other than 2.6 you can install it in a localized 
                 location and trigger all Quotr functions using the new version of Python. In order to do that check out 
-                <a href="">localized python install</a></p>
+                <a href="{{ url_for('tutorials') }}#localizedpythoninstall">localized python install</a></p>
                 <p>Apart from basic Python you'll require:
                 <ol>
                   <li>Flask</li>
@@ -86,10 +96,9 @@
                   <li>Flask-Bcrypt</li>
                   <li>Flask-WTF</li>
                   <li>Py-SQLite3</li>
-                  <li>Argparser</li>
                 </ol>
-                Please install the latest versions. <a href="">Here's a short tutorial</a> on working with pip to install these modules.
-                If you require there is a complete dependency setup script which can be downloaded from <a href="">here</a>.
+                Please install the latest versions. <a href="{{ url_for('tutorials') }}#usingpip">Here's a short tutorial</a> on working with pip to install these modules.
+                If you require there is a complete dependency setup script which can be downloaded from <a href="{{ url_for('scripts') }}#dependency">here</a>.
                 </p>
               </div><!-- span11 ends -->
              </div> 
@@ -103,7 +112,6 @@
               </div><!-- page header ends -->
               <div class="row">
               <div class="span5">
-              <p></p>
                  <span class="label notice">Keywords</span>
                     <p><span class="label ">Setup</span>
                     <span class="label ">Command line</span>
@@ -113,13 +121,48 @@
               <div class="span11">
                 <p class="justified_text">
                 Quick installation of Quotr wiki requires some commandline work. But don't worry. It's as easy as it gets.
-                
-                <pre class="prettyprint linenums">
-                  <ol class="linenums">
-                    <li>python websetup.py -h</li>
-                  </ol>
+                <ol>
+                  <li>Create a file in the conf folder. Name it <strong>onetimeconf.py</strong>. It should have the following in it:</li>
+                  <pre>
+                  admin_email = '&lt;your email address&gt;'<br />
+                  admin_nick = '&lt;your intended nick&gt;'<br />
+                  admin_pass = '&lt;your intended password&gt;'</pre>
+                  <li>Execute the following command</li>
+                  <code>python websetup.py</code>
+                  <li>Edit the appconf.py in the conf folder to edit the name of the database. Read the comments carefully</li>
+                  <li>Follow the instructions and the database will be created first. After that the admin will be setup and the file will be deleted.</li>
+                  <li>This step applies only if the file wasn't deleted. Go to the conf folder and delete the file <strong>onetimeconf.py</strong></li>
+                  <li>That's it! You're good to go.</li>
+                </ol>
+                </p>
+              </div><!-- span11 ends -->
+             </div> 
+          </section>
+          
+          
+          <section id="Security">
+            
+              <div class="page-header">
+                <h2>Security issues<small> what can go wrong</small></h2>
+              </div><!-- page header ends -->
+              <div class="row">
+              <div class="span5">
+                 <span class="label notice">Keywords</span>
+                    <p><span class="label ">Setup</span>
+                    <span class="label ">Command line</span>
+                    <span class="label ">Debug</span>
+                    <span class="label ">onetimeconf.py</span>
+              </div><!-- span 5 ends -->
               
-                </pre>
+              <div class="span11">
+                <p class="justified_text">
+                Quotr was built using Python and Flask, so it is very secure. However if at all you leave the <strong>DEBUG</strong> key<strong> ON</strong> for developmental purposes, it
+                can lead to a lot of problems. Always rememeber if you're not developing on Quotr please leave the <strong>DEBUG</strong> to <strong>OFF</strong>. Another security issue is
+                typing the password on the command line prompt. Hence the workaround to create the first admin. Kindly delete the file <strong>onetimeconf.py</strong> if not done automatically
+                once the admin is setup. It is important security issue.
+                </p>
+                <p>
+                The <strong>DEBUG</strong> key can be issued a <strong>False</strong> value manually as well. Go inside the conf folder and edit the file <strong>appconf.py</strong>
                 </p>
               </div><!-- span11 ends -->
              </div> 
